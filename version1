@@ -1,0 +1,28 @@
+<!-- Cardano payment button code -->
+<button id="cardano-payment-button">Pay with Cardano</button>
+
+<!-- Include the Cardano payment API -->
+<script src="https://cardano-payment-api.com/api.js"></script>
+
+<script>
+    // Define the payment amount and currency
+    const paymentAmount = 100; // in ADA
+    const paymentCurrency = "ADA";
+
+    // Create a Cardano payment object
+    const cardanoPayment = new CardanoPayment();
+
+    // Define the payment button click event
+    document.getElementById("cardano-payment-button").addEventListener("click", () => {
+        // Generate a payment address
+        cardanoPayment.generatePaymentAddress(paymentAmount, paymentCurrency)
+            .then((paymentAddress) => {
+                // Display the payment address to the customer
+                alert(`Please send ${paymentAmount} ${paymentCurrency} to the following address: ${paymentAddress}`);
+            })
+            .catch((error) => {
+                console.error(error);
+                alert("An error occurred while generating the payment address. Please try again.");
+            });
+    });
+</script>
